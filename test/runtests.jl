@@ -1,4 +1,4 @@
-using .Wikidata
+using Wikidata
 using Test
 using HTTP
 
