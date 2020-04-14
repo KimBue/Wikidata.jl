@@ -23,5 +23,25 @@ end
     function hasproperty(x::WikidataEntity, property::String)
         return haskey(x.dataDict["claims"], property)
 end
+    """
+        returns a list of properties of different type.
+        Supported properties: item
+    """
+    function getproperty(x::WikidataEntity, property::String)
+        if (!hasproperty(x, property))
+            throw(ArgumentError("Entity does not have property $(property)"))
+        end
+        propertylist = x.dataDict["claims"][property]
+        returnlist = Any[]
+        for p in propertylist
+            datatype = p["mainsnak"]["datavalue"]["value"]["entity-type"]
+            if(datatype == "item")
+                itemcode = p["mainsnak"]["datavalue"]["value"]["id"]
+                push!(returnlist, WikidataEntity(itemcode))
+            end
+        end
+        return returnlist
+
+end
 
 end # module

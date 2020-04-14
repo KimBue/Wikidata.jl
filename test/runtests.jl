@@ -8,4 +8,9 @@ using HTTP
     @test_throws HTTP.ExceptionRequest.StatusError Wikidata.WikidataEntity("Douglas Adams")
     @test Wikidata.hasproperty(entity, "P31")== true
     @test Wikidata.hasproperty(entity, "P38")== false
+
+    @test_throws ArgumentError Wikidata.getproperty(entity, "P38")
+    propList = Wikidata.getproperty(entity, "P31")
+    @test size(propList, 1) == 1
+    @test Wikidata.label(propList[1]) == "human"
 end
