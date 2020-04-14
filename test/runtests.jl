@@ -6,4 +6,6 @@ using HTTP
     entity = Wikidata.WikidataEntity("Q42")
     @test  Wikidata.label(entity)=="Douglas Adams"
     @test_throws HTTP.ExceptionRequest.StatusError Wikidata.WikidataEntity("Douglas Adams")
+    @test Wikidata.hasproperty(entity, "P31")== true
+    @test Wikidata.hasproperty(entity, "P38")== false
 end

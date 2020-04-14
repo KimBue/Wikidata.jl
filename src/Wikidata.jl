@@ -20,5 +20,8 @@ module Wikidata
     function label(x::WikidataEntity)
     x.dataDict["labels"]["en"]["value"]
 end
+    function hasproperty(x::WikidataEntity, property::String)
+        return haskey(x.dataDict["claims"], property)
+end
 
 end # module
