@@ -6,3 +6,17 @@
 [![Coveralls](https://coveralls.io/repos/github/KimBue/Wikidata.jl/badge.svg?branch=master)](https://coveralls.io/github/KimBue/Wikidata.jl?branch=master)
 
 This is a project to implement a Wikidata Client in Julia. For the moment, I am using this project to get used to Julia.
+
+## Usage
+
+```julia
+#load a Wikidata-Entity (Douglas Adams 
+adams = Wikidata.WikidataEntity("Q42")
+println(Wikidata.label(adams))
+
+#check if place of bith exists for this entity:
+if(Wikidata.hasproperty("P31")
+  placeofbirth = Wikidata.getproperty(adams, "P31")
+  println(Wikidata.label(placeofbirth)
+end
+```
