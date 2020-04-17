@@ -10,7 +10,7 @@ This is a project to implement a Wikidata Client in Julia. For the moment, I am 
 ## Usage
 
 ```julia
-#load a Wikidata-Entity (Douglas Adams 
+#load a Wikidata-Entity (Douglas Adams) 
 adams = Wikidata.WikidataEntity("Q42")
 println(Wikidata.label(adams))
 
