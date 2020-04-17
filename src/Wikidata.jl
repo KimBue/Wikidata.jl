@@ -8,6 +8,8 @@ module Wikidata
         dataDict::Dict
     end
 
+
+
     function WikidataEntity(name::String)
         resp = HTTP.get("https://www.wikidata.org/wiki/Special:EntityData/$(name).json")
         #resp = HTTP.request("get", "www.google.com")
@@ -34,10 +36,16 @@ end
         propertylist = x.dataDict["claims"][property]
         returnlist = Any[]
         for p in propertylist
-            datatype = p["mainsnak"]["datavalue"]["value"]["entity-type"]
-            if(datatype == "item")
+            datatype = p["mainsnak"]["datavalue"]["type"]
+            #item type
+            if(datatype == "wikibase-entityid")
                 itemcode = p["mainsnak"]["datavalue"]["value"]["id"]
                 push!(returnlist, WikidataEntity(itemcode))
+            #coordinates type
+            elseif(datatype == "globecoordinate")
+                latlontuple = (p["mainsnak"]["datavalue"]["value"]["latitude"], p["mainsnak"]["datavalue"]["value"]["longitude"])
+                push!(returnlist, latlontuple)
+
             end
         end
         return returnlist
