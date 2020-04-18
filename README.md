@@ -20,3 +20,28 @@ if(Wikidata.hasproperty("P31")
   println(Wikidata.label(placeofbirth)
 end
 ```
+
+## Example
+How to extract birthplaces and their coordinates for all presidents (head of governement) of the US (or any other country)
+```julia
+
+function getPresidentsBirthPlaces(x::String)
+    df = DataFrame(Name = String[], birthplace= String[], geb_lat = BigFloat[], geb_lot = BigFloat[])
+    country = Wikidata.WikidataEntity(x)
+    #head of government is found under Property P6
+    presidents_Entities = Wikidata.getproperty(country, "P6")
+    for president in presidents_Entities
+       try
+       #P19 is the place-of-birth property 
+       birthplace_Entity = Wikidata.getproperty(president, "P19")
+       #P625 is the coordinate location property 
+       birthplace_latlon = Wikidata.getproperty(birthplace_Entity[1], "P625")[1]
+       push!(df, (Wikidata.label(president), Wikidata.label(birthplace_Entity[1]),birthplace_latlon[1], birthplace_latlon[2]))
+        catch
+            println("Data not found")
+        end
+    end
+    df
+ end
+ df = getPresidentsBirthPlaces("Q30") #Q30 is the identifier for the US, Q183 is the identifier of Germany etc.
+```
