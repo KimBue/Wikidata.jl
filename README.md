@@ -14,7 +14,7 @@ This is a project to implement a [Wikidata](https://www.wikidata.org/wiki/Wikida
 adams = Wikidata.WikidataEntity("Q42")
 println(Wikidata.label(adams))
 
-#check if place of bith exists for this entity:
+#check if place of birth exists for this entity:
 if(Wikidata.hasproperty("P31")
   placeofbirth = Wikidata.getproperty(adams, "P31")
   println(Wikidata.label(placeofbirth)
