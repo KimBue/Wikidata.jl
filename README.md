@@ -24,9 +24,11 @@ end
 ## Example
 How to extract birthplaces and their coordinates for all presidents (head of governement) of the US (or any other country)
 ```julia
+using Wikidata
+using DataFrames
 
 function getPresidentsBirthPlaces(x::String)
-    df = DataFrame(Name = String[], birthplace= String[], geb_lat = BigFloat[], geb_lot = BigFloat[])
+    df = DataFrame(Name = String[], birthplace= String[], birthplace_lat = BigFloat[], birthplace_lon = BigFloat[])
     country = Wikidata.WikidataEntity(x)
     #head of government is found under Property P6
     presidents_Entities = Wikidata.getproperty(country, "P6")
