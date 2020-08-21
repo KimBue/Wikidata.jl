@@ -15,8 +15,8 @@ adams = Wikidata.WikidataEntity("Q42")
 println(Wikidata.label(adams))
 
 #check if place of birth exists for this entity:
-if(Wikidata.hasproperty("P31")
-  placeofbirth = Wikidata.getproperty(adams, "P31")
+if(Wikidata.hasproperty(adams, "P19")
+  placeofbirth = Wikidata.getproperty(adams, "P19")
   println(Wikidata.label(placeofbirth)
 end
 ```
