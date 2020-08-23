@@ -81,6 +81,8 @@ end
             elseif(datatype == "globecoordinate")
                 latlontuple = (p["mainsnak"]["datavalue"]["value"]["latitude"], p["mainsnak"]["datavalue"]["value"]["longitude"])
                 push!(returnlist, latlontuple)
+            else
+                throw("Unimplemented: Datatype $(datatype) is not implemented yet. Feel free to send a pull request to https://github.com/KimBue/Wikidata.jl" )
 
             end
         end
